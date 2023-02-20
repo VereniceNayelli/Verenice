@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>CLASE 4</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo"><strong>Laboratorio</strong> <span>de innovación 2</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Inicio</a></li>
+							<li><a href="landing.html">Sobre Mi</a></li>
+							<li><a href="generic.html">Bitacora</a></li>
+							<li><a href="elements.html">Proyecto</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+							<li><a href="#" class="button fit">Log In</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>CLASE 6</h1>
+									</header>
+									<div>
+									<p><span class="image right"><img src="images/servomotor.jpg" alt="" /></span><h4>¿Qué es un servomotor?</h4>
+										Un servomotor es un actuador rotativo o motor que permite un control preciso en términos de posición angular, aceleración y velocidad, capacidades que un motor normal no tiene. En definitiva, utiliza un motor normal y lo combina con un sensor para la retroalimentación de posición.</p>
+
+									</div>
+									<p>  . </p>
+									<p> . </p>
+									<p> . </p>
+
+										<h4>PROYECTO DE CLASE I </h4>
+										<span class="image main"><img src="images/proyect1.png" alt="" /></span>
+										<p> Breve descripción (no olvidar) sensor de distacia </p>
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-4"><span class="image fit"><img src="images/4.1.jpg" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/4.2.jpg" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/4.3.jpg" alt="" /></span></div>
+											<p></p>
+									<!-- Preformatted Code -->
+									<h3>CÓDIGO </h3>
+									<pre><code>
+const int pinEcho = 9;
+const int pinLed = 3;
+const int pinBuzzer = 7;
+float tiempo = 0;
+float distancia = 0;
+										
+void setup()
+{
+pinMode(pinTrigger, OUTPUT);
+pinMode(pinEcho, INPUT);
+pinMode(pinLed, OUTPUT);
+pinMode(pinBuzzer, OUTPUT);
+Serial.begin(9600);
+}
+										
+void loop()
+{
+digitalWrite(pinTrigger, LOW);
+delayMicroseconds(4);
+digitalWrite(pinTrigger, HIGH);
+delayMicroseconds (10);
+digitalWrite(pinTrigger, LOW);
+tiempo=pulseIn(pinEcho, HIGH);
+distancia=0.0172*tiempo;
+/* Serial.println("Distancia (cm)");
+Serial.println (distancia);
+delay (500);*/
+if(distancia>100){
+noTone(pinBuzzer);
+digitalWrite(pinLed, LOW);
+}
+else{
+tone(pinBuzzer,1000);
+digitalWrite(pinLed, HIGH);
+delay(distancia*10);
+noTone(pinBuzzer);
+digitalWrite(pinLed, LOW);     
+delay(distancia*10);     
+}
+						  
+</code></pre>
+
+										</div>
+								
+										<ul class="pagination">
+											<li><a href="clase5.html" class="button small">prev</a></li>
+											<li><a href="clase1.html" class="page">1</a></li>
+											<li><a href="clase2.html" class="page">2</a></li>
+											<li><a href="clase3.html" class="page">3</a></li>
+											<li><span>&hellip;</span></li>
+											<li><a href="clase18.html" class="page">18</a></li>
+											<li><a href="clase19.html" class="page">19</a></li>
+											<li><a href="clase20.html" class="page">20</a></li>
+											<li><a href="clase7.html" class="button small">Next</a></li>
+										</ul>
+								</div>
+								
+							</section>
+
+							<!-- Footer -->
+							<footer id="footer">
+								<div class="inner">
+									<ul class="icons">
+										<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="https://www.facebook.com/quispeblas/" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://www.instagram.com/verenice.30/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+									</ul>
+									<ul class="copyright">
+										<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+									</ul>
+								</div>
+							</footer>
+						
+
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

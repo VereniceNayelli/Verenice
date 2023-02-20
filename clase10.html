@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>CLASE 10</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo"><strong>Laboratorio</strong> <span>de innovación 2</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Inicio</a></li>
+							<li><a href="landing.html">Sobre Mi</a></li>
+							<li><a href="generic.html">Bitacora</a></li>
+							<li><a href="elements.html">Proyecto</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+							<li><a href="#" class="button fit">Log In</a></li>
+						</ul>
+					</nav>
+					
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+						<section id="one">
+							<div class="inner">
+								<header class="major">
+									<h1>CLASE 10</h1>
+								</header>
+								
+								<b>PROCESO DE PRUEBA DEL ARDUINO:</b>
+								<p>En esta clase hubo revisión de los componentes y se realizó las pruebas para que funcionen.</p>
+								<ul><li>File > Examples  > 01. Basics > Blink  </li></ul>
+								<div class="box alt">
+									<div class="row gtr-50 gtr-uniform">
+									<span> <img height="500" src="images/clas10.0.jpg" alt="" /></span>
+									<video class="image right" center src="video/clas10.1.mp4" autoplay muted lopp controls  width="400" height="500" type="video/mp4">
+								</div>
+									
+									
+									<b> PROCESO DE PRUEBA DEL MATRIZ LED 8X32</b>
+									<ul><li><h3>ARMADO</h3></li></ul>
+									<div class="col-4"><span class center><img src="images/clas10.2.jpeg" alt="" /></span></div>
+
+									<p> </p>									
+									<ul><li><h3>CODIGO</h3></li></ul>
+									<pre><code>#include <SPI.h>
+										#include <Adafruit_GFX.h>
+#include <Max72xxPanel.h>
+ 
+//Vcc - Vcc
+//Gnd - Gnd
+//Din - Mosi (Pin 11)
+//Cs  - SS (Pin 10)
+//Clk - Sck (Pin 13)
+ 
+const int pinCS = 10;
+const int numberOfHorizontalDisplays = 8;
+const int numberOfVerticalDisplays = 1;
+ 
+Max72xxPanel matrix = Max72xxPanel(pinCS, numberOfHorizontalDisplays, numberOfVerticalDisplays);
+
+const int wait = 50; // Velocidad a la que realiza el scroll
+ 
+const int spacer = 1;
+const int width = 5 + spacer; // Ancho de la fuente a 5 pixeles
+ 
+void setup(){
+   Serial.begin(9600);
+   matrix.setIntensity(1); // Ajustar el brillo entre 0 y 15
+   matrix.setPosition(0, 0, 0); // El primer display esta en <0, 0>
+   matrix.setPosition(1, 1, 0); // El segundo display esta en <1, 0>
+   matrix.setPosition(2, 2, 0); // El tercer display esta en <2, 0>
+   matrix.setPosition(3, 3, 0); // El cuarto display esta en <3, 0>
+   matrix.setPosition(4, 4, 0); // El quinto display esta en <4, 0>
+   matrix.setPosition(5, 5, 0); // El sexto display esta en <5, 0>
+   matrix.setPosition(6, 6, 0); // El séptimo display esta en <6, 0>
+   matrix.setPosition(7, 7, 0); // El octavo display esta en <7, 0>
+   matrix.setPosition(8, 8, 0); // El noveno display esta en <8, 0>
+   matrix.setRotation(0, 1);    // Posición del display
+   matrix.setRotation(1, 1);    // Posición del display
+   matrix.setRotation(2, 1);    // Posición del display
+   matrix.setRotation(3, 1);    // Posición del display
+   matrix.setRotation(4, 1);    // Posición del display
+   matrix.setRotation(5, 1);    // Posición del display
+   matrix.setRotation(6, 1);    // Posición del display
+   matrix.setRotation(7, 1);    // Posición del display
+   matrix.setRotation(8, 1);    // Posición del display
+}
+ 
+void loop(){
+   String cadena = "";
+   long int time = millis();
+   while(Serial.available()){
+      cadena += char(Serial.read());
+   }
+   for(int i = 0; i < width * cadena.length() + matrix.width() - 1 - spacer; i++){
+      matrix.fillScreen(LOW);
+      int letter = i / width;
+      int x = (matrix.width() - 1) - i % width;
+      int y = (matrix.height() - 8) / 2; // Centrar el texto
+      while(x + width - spacer >= 0 && letter >= 0){
+         if(letter < cadena.length()){
+             matrix.drawChar(x, y, cadena[letter], HIGH, LOW, 1);
+         }
+         letter--;
+         x -= width;
+      }
+      matrix.write(); // Muestra loscaracteres
+      delay(wait);
+   }
+}
+</code></pre>
+									
+									<ul><li><h3>RESULTADO</h3></li></ul>
+									<p>Realizamos las pruebas muy bien de la matriz y si se pudo realizar los cambios desde <b>String cadena y el monitor.</b></p>
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<video src="video/clas10.3.mp4" autoplay muted lopp controls  width="400" height="320" type="video/mp4"></video>
+											<div class="col-4"><span class="image fit"><img src="images/clas10.4.jpeg" alt="" /></span></div>
+											<div class="col-4"><span class="image fit"><img src="images/clas10.5.jpeg" alt="" /></span></div>
+										</div>
+									</div>
+
+
+									<ul class="pagination">
+										<li><a href="clase9.html" class="button small">prev</a></li>
+										<li><a href="clase1.html" class="page">1</a></li>
+										<li><a href="clase2.html" class="page">2</a></li>
+										<li><a href="clase3.html" class="page">3</a></li>
+										<li><span>&hellip;</span></li>
+										<li><a href="clase18.html" class="page">18</a></li>
+										<li><a href="clase19.html" class="page">19</a></li>
+										<li><a href="clase20.html" class="page">20</a></li>
+										<li><a href="clase11.html" class="button small">Next</a></li>
+									</ul>
+
+								</div>								
+							</section>
+
+							<!-- Footer -->
+							<footer id="footer">
+								<div class="inner">
+									<ul class="icons">
+										<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="https://www.facebook.com/quispeblas/" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="https://www.instagram.com/verenice.30/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+									</ul>
+									<ul class="copyright">
+										<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+									</ul>
+								</div>
+							</footer>
+
+						</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
